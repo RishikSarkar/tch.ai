@@ -12,7 +12,9 @@
     "next": "13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.8.0"
+    "react-dropzone": "^14.2.3",
+    "react-icons": "^4.8.0",
+    "react-webcam": "^7.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

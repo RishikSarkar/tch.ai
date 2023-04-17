@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from keras.models import load_model
 import numpy as np
 import os
@@ -7,8 +8,9 @@ import cv2
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 app = Flask(__name__)
+CORS(app)
 
-model_path = 'backend/model/model.h5'
+model_path = 'model/model.h5'
 model = load_model(model_path)
 
 @app.route('/predict-emotion', methods=['POST'])
@@ -48,7 +50,7 @@ def preprocess_image(img):
     else:
         gray = img
 
-    haarscascade_dir = 'backend/haarscascade/haarcascade_frontalface_alt2.xml'
+    haarscascade_dir = 'haarscascade/haarcascade_frontalface_alt2.xml'
     face_cascade = cv2.CascadeClassifier(haarscascade_dir)
     faces = face_cascade.detectMultiScale(gray, 1.1, 4)
 

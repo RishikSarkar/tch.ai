@@ -25,8 +25,8 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className={shadow ? 'font-roboto fixed w-full h-20 shadow-xl z-[100] select-none bg-gradient-to-r from-[#11173a] via-[#191970] to-[#008080] text-[#F0FFFF]' :
-    'font-roboto fixed w-full h-20 z-[100] select-none bg-gradient-to-r from-[#11173a] via-[#191970] to-[#008080] text-[#F0FFFF]'}>
+    <div className={shadow ? 'font-roboto fixed w-full h-20 shadow-xl z-[100] select-none text-[#F0FFFF]' :
+    'font-roboto fixed w-full h-20 z-[100] select-none text-[#F0FFFF]'}>
       <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
         <div className='ml-8 md:ml-0 flex items-center'>
           <h2 className='font-light ml-2 text-[#F0FFFF]'>vivaldi</h2>
