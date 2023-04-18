@@ -39,7 +39,7 @@ html {
   }
 
   body {
-    @apply bg-gradient-to-r from-[#11173a] via-[#191970] to-[#008080] text-[#F0FFFF] tracking-wide
+    @apply bg-gradient-to-r from-bg-start to-bg-end text-[#F0FFFF] tracking-wide;
   }
 
   h1, h2, h3, h4, h5, h6 {

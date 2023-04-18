@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import {AiOutlineMenu} from 'react-icons/ai';
 import {RxCross1} from 'react-icons/rx'
@@ -33,20 +32,13 @@ const Navbar = () => {
         </div>
         <div>
           <ul className='font-medium hidden md:flex text-[#ecf0f3]'>
+
               <Link href='/'>
-                <li className='ml-4 text-sm uppercase px-6 p-3 rounded-full hover:bg-[#BBEBE9] hover:bg-opacity-10 ease-in duration-100'>Courses</li>
+                <li className='ml-4 font-light text-lg uppercase px-6 p-3 rounded-full hover:bg-[#BBEBE9] bg-opacity-10 hover:bg-opacity-30 ease-in duration-100'>Login</li>
               </Link>
 
               <Link href='/'>
-                <li className='ml-4 text-sm uppercase px-6 p-3 rounded-full hover:bg-[#BBEBE9] hover:bg-opacity-10 ease-in duration-100'>Resources</li>
-              </Link>
-
-              <Link href='/'>
-                <li className='ml-4 text-sm uppercase px-6 p-3 rounded-full hover:bg-[#BBEBE9] hover:bg-opacity-10 ease-in duration-100'>Login</li>
-              </Link>
-
-              <Link href='/'>
-                <li className='ml-4 text-sm uppercase px-6 p-3 rounded-full hover:bg-[#BBEBE9] hover:bg-opacity-10 ease-in duration-100'>Sign Up</li>
+                <li className='ml-4 font-light text-lg uppercase px-6 p-3 rounded-full hover:bg-[#BBEBE9] bg-opacity-10 hover:bg-opacity-30 ease-in duration-100'>Sign Up</li>
               </Link>
 
           </ul>
@@ -57,7 +49,7 @@ const Navbar = () => {
       </div>
 
       <div className={nav ? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/80' : ''}>
-        <div className={nav ? 'fixed left-0 top-0 w-full sm:w-[60%] md:w-[45%] h-screen bg-[#11173a] p-12 ease-in duration-500' : 'fixed left-[-100%] h-screen top-0 p-12 ease-in duration-500'}>
+        <div className={nav ? 'fixed left-0 top-0 w-full sm:w-[60%] md:w-[45%] h-screen p-12 ease-in duration-500' : 'fixed left-[-100%] h-screen top-0 p-12 ease-in duration-500'}>
           <div>
             <div className='flex w-full items-center justify-end'>
               <div onClick={handleNav} className='text-xl text-[#ecf0f3] -mt-8 -mr-6 rounded-full hover:bg-[#BBEBE9] hover:bg-opacity-10 ease-in duration-100 p-4 cursor-pointer'>
@@ -69,19 +61,11 @@ const Navbar = () => {
             <ul className='uppercase'>
 
                 <Link href='/'>
-                  <li onClick={()=> setNav(false)} className='mb-4 p-6 px-10 text-md text-[#ecf0f3] rounded-full hover:bg-[#BBEBE9] hover:bg-opacity-10 ease-in duration-100'>Courses</li>
+                  <li onClick={()=> setNav(false)} className='mb-4 p-6 px-10 text-md text-[#ecf0f3] rounded-full hover:bg-[#BBEBE9] bg-opacity-10 hover:bg-opacity-30 ease-in duration-100'>Login</li>
                 </Link>
 
                 <Link href='/'>
-                  <li onClick={()=> setNav(false)} className='mb-4 p-6 px-10 text-md text-[#ecf0f3] rounded-full hover:bg-[#BBEBE9] hover:bg-opacity-10 ease-in duration-100'>Resources</li>
-                </Link>
-
-                <Link href='/'>
-                  <li onClick={()=> setNav(false)} className='mb-4 p-6 px-10 text-md text-[#ecf0f3] rounded-full hover:bg-[#BBEBE9] hover:bg-opacity-10 ease-in duration-100'>Login</li>
-                </Link>
-
-                <Link href='/'>
-                  <li onClick={()=> setNav(false)} className='mb-4 p-6 px-10 text-md text-[#ecf0f3] rounded-full hover:bg-[#BBEBE9] hover:bg-opacity-10 ease-in duration-100'>Sign Up</li>
+                  <li onClick={()=> setNav(false)} className='mb-4 p-6 px-10 text-md text-[#ecf0f3] rounded-full hover:bg-[#BBEBE9] bg-opacity-10 hover:bg-opacity-30 ease-in duration-100'>Sign Up</li>
                 </Link>
 
             </ul>
