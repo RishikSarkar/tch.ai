@@ -4,8 +4,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
 html {
   scroll-behavior: smooth !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @font-face {
@@ -39,7 +47,7 @@ html {
   }
 
   body {
-    @apply bg-gradient-to-r from-bg-start to-bg-end text-[#F0FFFF] tracking-wide;
+    @apply bg-gradient-to-br from-bg-start to-bg-end text-[#F0FFFF] tracking-wide;
   }
 
   h1, h2, h3, h4, h5, h6 {

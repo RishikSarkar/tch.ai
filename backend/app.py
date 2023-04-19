@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from keras.models import load_model
 import numpy as np
+import pandas as pd
 import os
 import cv2
 
@@ -13,6 +14,10 @@ CORS(app)
 model_path = 'model/model.h5'
 model = load_model(model_path)
 
+song_dataset = pd.read_csv(os.path.join('data', 'song_moods.csv'))
+song_dataset = song_dataset[['name', 'artist', 'mood']]
+
+# Predict Emotion
 @app.route('/predict-emotion', methods=['POST'])
 def predict_emotion():
     file = request.files['image']
@@ -29,8 +34,6 @@ def predict_emotion():
     img_processed = preprocess_image(img_array)
 
     img_resized = cv2.resize(img_processed, (48, 48))
-
-
 
     img_array = np.array(img_resized)
 
@@ -65,6 +68,25 @@ def mood_from_label(label):
     return labels[label]
 
 
+@app.route('/recommend-songs', methods=['POST'])
+def recommend_songs():
+    data = request.get_data(as_text=True)
+    song_mood = song_dataset['mood'] == find_song_mood(data)
+    temp = song_dataset.where(song_mood)
+    temp = temp.dropna()
+    songs = temp.sample(n=5, replace=False)
+    songs = songs.loc[:, ['name', 'artist']]
+    return songs.to_json(orient='records')
+
+def find_song_mood(pred):
+    if (pred == 'angry' or pred == 'disgust' or pred == 'fear'):
+        return 'Calm'
+    elif (pred == 'happy' or pred == 'neutral'):
+        return 'Happy'
+    elif (pred == 'sad'):
+        return 'Sad'
+    elif (pred == 'surprise'):
+        return 'Energetic'
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
