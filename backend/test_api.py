@@ -6,10 +6,10 @@ files = {'image': open('image.jpg', 'rb')}
 response = requests.post(url, files=files)
 
 prediction = response.content.decode('utf-8')
-print(prediction)
+# print(prediction)
 
 url = 'http://localhost:5000/recommend-songs'
-data = prediction
+data = 'sad'
 
 response = requests.post(url, data=data)
 print(response.json())

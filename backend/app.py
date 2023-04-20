@@ -14,8 +14,11 @@ CORS(app)
 model_path = 'model/model.h5'
 model = load_model(model_path)
 
-song_dataset = pd.read_csv(os.path.join('data', 'song_moods.csv'))
-song_dataset = song_dataset[['name', 'artist', 'mood']]
+# song_dataset = pd.read_csv(os.path.join('data', 'song_moods.csv'))
+# song_dataset = song_dataset[['name', 'artist', 'mood']]
+
+song_dataset = pd.read_csv(os.path.join('data', 'dataset.csv'))
+song_dataset = song_dataset[['track_name', 'artists', 'energy', 'loudness', 'mode', 'valence', 'track_genre']]
 
 # Predict Emotion
 @app.route('/predict-emotion', methods=['POST'])
@@ -76,6 +79,23 @@ def recommend_songs():
     temp = temp.dropna()
     songs = temp.sample(n=5, replace=False)
     songs = songs.loc[:, ['name', 'artist']]
+
+
+    # if (pred == 'angry'):
+
+    # elif (pred == 'disgust'):
+
+    # elif (pred == 'fear'):
+
+    # elif (pred == 'happy'):
+
+    # elif (pred == 'neutral'):
+
+    # elif (pred == 'sad'):
+
+    # elif (pred == 'energetic'):
+
+
     return songs.to_json(orient='records')
 
 def find_song_mood(pred):
@@ -87,6 +107,24 @@ def find_song_mood(pred):
         return 'Sad'
     elif (pred == 'surprise'):
         return 'Energetic'
+    
+def find_song_genres(pred):
+    if (pred == 'angry'):
+        return ['alternative', 'black-metal', 'death-metal', 'dubstep', 'heavy-metal', 'grindcore', 'metal']
+    elif (pred == 'disgust'):
+        return ['black-metal', 'country', 'folk', 'grindcore', 'goth', 'industrial', 'punk', 'emo']
+    elif (pred == 'fear'):
+        return ['ambient', 'chill', 'classical', 'deep-house', 'jazz', 'piano', 'study', 'sleep', 'trance']
+    elif (pred == 'happy'):
+        return ['acoustic', 'ambient', 'anime', 'classical', 'disco', 'disney', 'happy', 'jazz', 'j-pop', 'k-pop', 'reggae', 'guitar']
+    elif (pred == 'neutral'):
+        return ['acoustic', 'hip-hop', 'jazz', 'pop', 'k-pop', 'rock', 'world-music', 'anime', 'indie', 'guitar']
+    elif (pred == 'sad'):
+        return ['acoustic', 'alternative', 'blues', 'goth', 'romance', 'sleep', 'soul', 'classical', 'piano']
+    elif (pred == 'energetic'):
+        return ['alt-rock', 'anime', 'bluegrass', 'breakbeat', 'detroit-techno', 'disco', 'dubstep', 'edm', 'hip-hop', 'house', 'rock-n-roll']
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
