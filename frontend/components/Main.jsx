@@ -21,54 +21,48 @@ const Main = ({setPredictionString}) => {
         root.style.setProperty("transition", "background 2s ease-in-out");   
     }, [bgStart, bgEnd]);
 
-    const handleColorChange = (prediction) => {
-      if (prediction === 'angry' || prediction === 'disgust' || prediction === 'fear') {
-        setBgStart('#4682B4');
-        setBgEnd('#9FE2BF');
-      }
-      else if (prediction === 'happy' || prediction === 'neutral') {
-        setBgStart('#FF5F1F');
-        setBgEnd('#FFBF00');
-      }
-      else if (prediction === 'sad') {
-        setBgStart('#000000');
-        setBgEnd('#36454F');
-      }
-      else if (prediction === 'surprise') {
-        setBgStart('#811331');
-        setBgEnd('#EC5800');
-      }
-      else {
-        setBgStart('#800080');
-        setBgEnd('#40E0D0');
-      }
-    };
-
-    const handleMusicMood = (prediction) => {
+    const handleMoodChange = (prediction) => {
+      // prediction = 'surprise';
       switch (prediction) {
         case 'angry':
-          setMood('You look angry. Hope this calming music helps!');
+          setMood("You look angry. Ready to unleash your inner metalhead?");
+          setBgStart('#000000');
+          setBgEnd('#800000');
           break;
         case 'disgust':
-          setMood('You seem disgusted. Hope this calming music helps!');
+          setMood('You seem disgusted. Listen to these at your own risk!');
+          setBgStart('#023020');
+          setBgEnd('#DFFF00');
           break;
         case 'fear':
-          setMood('You seem afraid. Hope this calming music helps!');
+          setMood('You seem afraid. Relax and unwind with these songs!');
+          setBgStart('#1434A4');
+          setBgEnd('#F0FFFF');
           break;
         case 'happy':
-          setMood("You look happy! Let's keep it that way, shall we?");
+          setMood("You look happy! Happy vibes, coming your way!");
+          setBgStart('#FF5F1F');
+          setBgEnd('#FCF55F');
           break;
         case 'neutral':
-          setMood('You look neutral. Time to turn that into a smile!');
+          setMood("You look neutral. Not sure what you're in the mood for?");
+          setBgStart('#630330');
+          setBgEnd('#CCCCFF');
           break;
         case 'sad':
-          setMood('You seem sad. Here are some sad songs for you.');
+          setMood('You seem sad. Sometimes sad songs can heal a broken heart.');
+          setBgStart('#000000');
+          setBgEnd('#7393B3');
           break;
         case 'surprise':
-          setMood("You look surprised! I'm excited to see you too!");
+          setMood("You look surprised! Get ready to feel the energy!");
+          setBgStart('#4A0404');
+          setBgEnd('#DE3163');
           break;
         default:
           setMood("And I'll give you a music playlist to match your mood!");
+          setBgStart('#800080');
+          setBgEnd('#40E0D0');
       }
     };
 
@@ -100,8 +94,7 @@ const Main = ({setPredictionString}) => {
         console.log(prediction);
         setPredictionString(prediction);
 
-        handleColorChange(prediction);
-        handleMusicMood(prediction);
+        handleMoodChange(prediction);
         setShowMood(false);
         setShowMood(true);
       } catch (error) {
