@@ -42,7 +42,7 @@ def predict_emotion():
 
     img_final = img_array.reshape(1, 48, 48, 1)
 
-    predict_x = model.predict(img_final)
+    predict_x = model.predict(img_final, verbose=0)
     result = np.argmax(predict_x, axis=1)
     prediction = mood_from_label(result[0])
 

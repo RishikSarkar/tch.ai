@@ -9,8 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'bg-start': '#000000',
-        'bg-end': '#36454F',
+        'bg-start': '#800080',
+        'bg-end': '#40E0D0',
       },
       
       gradientColorStops: {
@@ -18,13 +18,30 @@ module.exports = {
         'bg-end': 'var(--bg-end)',
       },
 
+      borderColor: {
+        'custom': 'var(--border-color)'
+      },
+
+      textColor: {
+        'custom': 'var(--border-color)'
+      },
+
       fontFamily: {
         'roboto': ['Roboto', 'sans-serif'],
         'montserrat': ['Montserrat', 'sans-serif']
       },
 
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+      },
+
       animation: {
-        'pulse-slow': 'pulse 3s cubic-bezier(0.5, 0, 0.5, 1) infinite;'
+        'pulse-slow': 'pulse 3s cubic-bezier(0.5, 0, 0.5, 1) infinite',
+        'bounce-slow': 'bounce 1s infinite cubic-bezier(.85, .01, .18, 1.01)',
+        'marquee': 'marquee 10s linear infinite',
       }
     },
   },

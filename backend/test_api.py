@@ -1,7 +1,7 @@
 import requests
 
 url = 'http://localhost:5000/predict-emotion'
-files = {'image': open('image.jpg', 'rb')}
+files = {'image': open('test_images/image.jpg', 'rb')}
 
 response = requests.post(url, files=files)
 

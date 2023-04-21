@@ -47,7 +47,7 @@ html {
   }
 
   body {
-    @apply bg-gradient-to-br from-bg-start to-bg-end text-[#F0FFFF] tracking-wide;
+    @apply bg-gradient-to-br from-bg-start to-bg-end text-white tracking-wide;
   }
 
   h1, h2, h3, h4, h5, h6 {

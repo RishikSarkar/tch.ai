@@ -6,6 +6,7 @@ import Songs from '../components/Songs'
 
 export default function Home() {
   const [predictionString, setPredictionString] = useState(null);
+  const [recommendedSongs, setRecommendedSongs] = useState([]);
 
   return (
     <div>
@@ -15,8 +16,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-    <Main setPredictionString={setPredictionString} />
-    <Songs predictionString={predictionString} />
+    <Main setPredictionString={setPredictionString} setRecommendedSongs={setRecommendedSongs} />
+    <Songs predictionString={predictionString} recommendedSongs={recommendedSongs} />
     </div>
   )
 }
