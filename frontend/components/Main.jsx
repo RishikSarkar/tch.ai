@@ -26,7 +26,7 @@ const Main = ({setPredictionString, setRecommendedSongs}) => {
     }, [bgStart, bgEnd]);
 
     const handleMoodChange = (prediction) => {
-      // prediction = 'surprise';
+      //prediction = 'disgust';
       switch (prediction) {
         case 'angry':
           setMood("You look angry. Ready to unleash your inner metalhead?");
@@ -162,7 +162,7 @@ const Main = ({setPredictionString, setRecommendedSongs}) => {
     };*/
 
     return (
-        <div id='main' className='font-roboto selection:text-[#00001F] selection:bg-white w-full h-screen text-center select-none'>
+        <div id='main' className='font-roboto selection:text-black selection:bg-white w-full h-screen text-center select-none'>
           <div className='max-w-[1440px] w-full h-full mx-auto p-12 flex justify-center items-center'>
               <div>
                   <h1 className={(currPrediction == null)? 'text-5xl font-light py-4 text-white uppercase' 
