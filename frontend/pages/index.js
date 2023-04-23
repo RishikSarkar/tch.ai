@@ -17,7 +17,7 @@ export default function Home() {
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
     <Main setPredictionString={setPredictionString} setRecommendedSongs={setRecommendedSongs} />
-    <Songs predictionString={predictionString} recommendedSongs={recommendedSongs} />
+    <Songs predictionString={predictionString} recommendedSongs={recommendedSongs} setRecommendedSongs={setRecommendedSongs} />
     </div>
   )
 }

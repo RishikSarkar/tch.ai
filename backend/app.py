@@ -90,7 +90,7 @@ def recommend_songs():
         songs = songs[songs['popularity'] >= 80]
     elif (data == 'sad'):
         songs = songs[(songs['mode'] == 0) & (songs['valence'] <= 0.26)]
-    elif (data == 'energetic'):
+    elif (data == 'surprise'):
         songs = songs[(songs['energy'] >= 0.85) & (songs['valence'] >= 0.46)]
 
     songs = songs.dropna()
@@ -122,7 +122,7 @@ def find_song_genres(pred):
         return ['acoustic', 'hip-hop', 'jazz', 'pop', 'k-pop', 'rock', 'world-music', 'anime', 'indie', 'guitar', 'country']
     elif (pred == 'sad'):
         return ['acoustic', 'alternative', 'blues', 'goth', 'romance', 'sleep', 'soul', 'classical', 'piano', 'british', 'emo']
-    elif (pred == 'energetic'):
+    elif (pred == 'surprise'):
         return ['alt-rock', 'anime', 'bluegrass', 'breakbeat', 'detroit-techno', 'disco', 'dubstep', 'edm', 'hip-hop', 'house', 'rock-n-roll']
 
 if __name__ == '__main__':

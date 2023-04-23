@@ -22,11 +22,11 @@ const Navbar = () => {
           <ul className='font-medium hidden md:flex text-[#ecf0f3]'>
 
               <Link href='/'>
-                <li className='ml-4 font-light text-lg uppercase px-6 p-3 rounded-full hover:bg-[#BBEBE9] bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>Login</li>
+                <li className='ml-4 font-light text-lg uppercase px-6 p-3 rounded-full hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>Login</li>
               </Link>
 
               <Link href='/'>
-                <li className='ml-4 font-light text-lg uppercase px-6 p-3 rounded-full hover:bg-[#BBEBE9] bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>Sign Up</li>
+                <li className='ml-4 font-light text-lg uppercase px-6 p-3 rounded-full hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>Sign Up</li>
               </Link>
 
           </ul>
@@ -40,7 +40,7 @@ const Navbar = () => {
         <div className={nav ? 'bg-gradient-to-br from-bg-start to-bg-start fixed left-0 top-0 w-full sm:w-[60%] md:w-[45%] h-screen p-12 ease-in duration-100' : 'fixed left-[-100%] h-screen top-0 p-12 ease-in duration-100'}>
           <div>
             <div className='flex w-full items-center justify-end'>
-              <div onClick={handleNav} className='text-xl text-white -mt-9 -mr-5 rounded-full hover:bg-[#BBEBE9] hover:bg-opacity-20 ease-in duration-100 p-4 cursor-pointer'>
+              <div onClick={handleNav} className='text-xl text-white -mt-9 -mr-5 rounded-full hover:bg-white hover:bg-opacity-20 ease-in duration-100 p-4 cursor-pointer'>
                 <RxCross1 />
               </div>
             </div>
@@ -49,11 +49,11 @@ const Navbar = () => {
             <ul className='uppercase'>
 
                 <Link href='/'>
-                  <li onClick={()=> setNav(false)} className='mb-4 p-6 px-10 font-light text-lg text-white rounded-full hover:bg-[#BBEBE9] bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>Login</li>
+                  <li onClick={()=> setNav(false)} className='mb-4 p-6 px-10 font-light text-lg text-white rounded-full hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>Login</li>
                 </Link>
 
                 <Link href='/'>
-                  <li onClick={()=> setNav(false)} className='mb-4 p-6 px-10 font-light text-lg text-white rounded-full hover:bg-[#BBEBE9] bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>Sign Up</li>
+                  <li onClick={()=> setNav(false)} className='mb-4 p-6 px-10 font-light text-lg text-white rounded-full hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>Sign Up</li>
                 </Link>
 
             </ul>
