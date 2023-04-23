@@ -191,6 +191,7 @@ const Main = ({setPredictionString, setRecommendedSongs}) => {
         setCurrPrediction(prediction);
 
         handleMoodChange(prediction);
+        handleChosenMoodChange(prediction);
         setShowMood(false);
         setShowMood(true);
       } catch (error) {
