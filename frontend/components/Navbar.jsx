@@ -16,7 +16,7 @@ const Navbar = () => {
     <div className='bg-gradient-to-br from-bg-start to-bg-start md:bg-none font-roboto fixed w-full h-20 z-[100] select-none text-white'>
       <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
         <div className='ml-8 md:ml-0 flex items-center'>
-          <h2 className='font-light ml-2 text-white'>vivaldi</h2>
+          <h2 className='font-light text-white'>tch.ai</h2>
         </div>
         <div>
           <ul className='font-medium hidden md:flex text-[#ecf0f3]'>
