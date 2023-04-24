@@ -7,7 +7,7 @@ import pandas as pd
 from flask_cors import CORS
 # from dotenv import load_dotenv
 from keras.models import load_model
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 # load_dotenv()
 
