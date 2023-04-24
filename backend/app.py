@@ -14,9 +14,6 @@ CORS(app)
 model_path = 'model/model.h5'
 model = load_model(model_path)
 
-# song_dataset = pd.read_csv(os.path.join('data', 'song_moods.csv'))
-# song_dataset = song_dataset[['name', 'artist', 'mood']]
-
 song_dataset = pd.read_csv(os.path.join('data', 'dataset.csv'))
 song_dataset = song_dataset[['track_name', 'artists', 'energy', 'loudness', 'mode', 'valence', 'track_genre', 'popularity']]
 
