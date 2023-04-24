@@ -1,5 +1,5 @@
 backend_venv/
 AWSCLI_accessKeys.csv
 backend.zip
-model.h5
+model/
 .env
