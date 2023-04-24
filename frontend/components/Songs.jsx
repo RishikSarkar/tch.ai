@@ -11,12 +11,12 @@ const Songs = ({predictionString, recommendedSongs, setRecommendedSongs}) => {
     const clientId = env.SPOTIFY_CLIENT_ID;
     const clientSecret = env.SPOTIFY_CLIENT_SECRET;
 
-    console.log('Client ID:', clientId);
-    console.log('Client Secret:', clientSecret);
+    // console.log('Client ID:', clientId);
+    // console.log('Client Secret:', clientSecret);
 
     const basicAuthString = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
-    console.log('BasicAuthString:', basicAuthString);
+    // console.log('BasicAuthString:', basicAuthString);
 
     const getToken = async () => {
         const params = new URLSearchParams();
