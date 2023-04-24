@@ -1,7 +1,7 @@
 import os
 import cv2
-import h5py
-import boto3
+# import h5py
+# import boto3
 import numpy as np
 import pandas as pd
 from flask_cors import CORS
@@ -20,19 +20,19 @@ CORS(app)
 # AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY", "")
 # AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME", "")
 
-s3 = boto3.client('s3', aws_access_key_id='AKIA5HOHUXBYQNPT26I2', aws_secret_access_key='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')
+# s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
-bucket = 'tchai-models'
-key = 'model.h5'
+# bucket = 'tchai-models'
+# key = 'model.h5'
 
-s3.download_file(bucket, key, 'model/temp-model')
-with h5py.File('model/temp-model','r') as f:
-    model = load_model('model/temp-model')
+# s3.download_file(bucket, key, 'model/temp-model')
+# with h5py.File('model/temp-model','r') as f:
+#     model = load_model('model/temp-model')
 
-os.remove('model/temp-model')
+# os.remove('model/temp-model')
 
-# model_path = 'model/model.h5'
-# model = load_model(model_path)
+model_path = 'model/model.h5'
+model = load_model(model_path)
 
 song_dataset = pd.read_csv(os.path.join('data', 'dataset.csv'))
 song_dataset = song_dataset[['track_name', 'artists', 'energy', 'loudness', 'mode', 'valence', 'track_genre', 'popularity']]
