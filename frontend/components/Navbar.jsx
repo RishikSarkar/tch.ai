@@ -10,7 +10,11 @@ const Navbar = () => {
     setNav(!nav);
   };
 
-
+  const [showLogin, setShowLogin] = useState(false);
+  
+  const handleShowLogin = () => {
+    setShowLogin(!showLogin)
+  }
 
   return (
     <div className='bg-gradient-to-br from-bg-start to-bg-start md:bg-none font-roboto fixed w-full h-20 z-[100] select-none text-white'>
@@ -19,24 +23,20 @@ const Navbar = () => {
           <h2 className='font-light text-white'>tch.ai</h2>
         </div>
         <div>
-          <ul className='font-medium hidden md:flex text-[#ecf0f3]'>
+          <div className='font-light hidden md:flex text-white'>
 
-              <Link href='/'>
-                <li className='ml-4 font-light text-lg uppercase px-6 p-3 rounded-full hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>Login</li>
-              </Link>
+              <button onClick={handleShowLogin} className='font-light text-lg uppercase px-6 p-3 rounded-full hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>
+                Login
+              </button>
 
-              <Link href='/'>
-                <li className='ml-4 font-light text-lg uppercase px-6 p-3 rounded-full hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>Sign Up</li>
-              </Link>
-
-          </ul>
+          </div>
           <div onClick={handleNav} className='md:hidden cursor-pointer'>
             <AiOutlineMenu className='mr-8 text-white' size = {25}/>
           </div>
         </div>
       </div>
 
-      <div className={nav ? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/80' : ''}>
+      <div className={nav? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/80' : ''}>
         <div className={nav ? 'bg-gradient-to-br from-bg-start to-bg-start fixed left-0 top-0 w-full sm:w-[60%] md:w-[45%] h-screen p-12 ease-in duration-100' : 'fixed left-[-100%] h-screen top-0 p-12 ease-in duration-100'}>
           <div>
             <div className='flex w-full items-center justify-end'>
@@ -46,20 +46,24 @@ const Navbar = () => {
             </div>
           </div>
           <div className='font-roboto py-12 flex flex-col'>
-            <ul className='uppercase'>
-
-                <Link href='/'>
-                  <li onClick={()=> setNav(false)} className='mb-4 p-6 px-10 font-light text-lg text-white rounded-full hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>Login</li>
-                </Link>
-
-                <Link href='/'>
-                  <li onClick={()=> setNav(false)} className='mb-4 p-6 px-10 font-light text-lg text-white rounded-full hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>Sign Up</li>
-                </Link>
-
-            </ul>
+            <button onClick={()=> setNav(false)} className='uppercase mb-4 p-6 px-10 font-light text-lg text-white rounded-full hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>
+              Login
+            </button>
           </div>
         </div>
       </div>
+      <div className={showLogin? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/80' : ''}>
+
+      </div>
+      {showLogin && (
+        <div className='w-[500px] h-[500px] bg-gradient-to-br from-bg-start to-bg-start mx-auto p-12 flex justify-center items-center'>
+          <div className='p-4'>
+            <h2 className='font-light uppercase'>
+              Login
+            </h2>
+          </div>
+        </div>
+      )}
 
     </div>
   )

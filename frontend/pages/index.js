@@ -12,12 +12,12 @@ export default function Home() {
     <div>
       <Head>
         <title>tch.ai</title>
-        <meta name="description" content="Vivaldi" />
+        <meta name="description" content="tch.ai" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-    <Main setPredictionString={setPredictionString} setRecommendedSongs={setRecommendedSongs} />
-    <Songs predictionString={predictionString} recommendedSongs={recommendedSongs} setRecommendedSongs={setRecommendedSongs} />
+      <Main setPredictionString={setPredictionString} setRecommendedSongs={setRecommendedSongs} />
+      <Songs predictionString={predictionString} recommendedSongs={recommendedSongs} setRecommendedSongs={setRecommendedSongs} />
     </div>
   )
 }
