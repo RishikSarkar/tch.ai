@@ -243,7 +243,7 @@ const Main = ({setPredictionString, setRecommendedSongs}) => {
         <div id='main' className='font-roboto selection:text-black selection:bg-white w-full h-screen text-center select-none'>
           <div className='max-w-[1440px] w-full h-full mx-auto p-12 flex justify-center items-center'>
               <div>
-                  <div className='grid grid-cols-3 gap-4 mb-8 md:mb-16 md:-mt-32'>
+                  <div className='grid grid-cols-3 gap-4 mb-8 mt-20 md:mb-16 md:-mt-32'>
                     
                     <button className={(chooseIt)? `border-b-4 border-b-custom md:w-[150px] font-light text-white cursor-pointer text-sm uppercase px-3 py-3 bg-white bg-opacity-5 select-none text-center` 
                                         : 'border-b-4 border-b-transparent md:w-[150px] font-light text-white cursor-pointer text-sm uppercase px-3 py-3 bg-white bg-opacity-5 hover:bg-opacity-20 ease-in duration-100 select-none text-center'}
@@ -275,34 +275,34 @@ const Main = ({setPredictionString, setRecommendedSongs}) => {
 
                     <div className='grid grid-cols-3 gap-4 mt-5'>
 
-                      <button className='md:w-[150px] font-medium text-white hover:text-custom cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('angry')}>
+                      <button className='md:w-[150px] font-medium text-white cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('angry')}>
                         Angry
                       </button>
 
-                      <button className='md:w-[150px] font-medium text-white hover:text-custom cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('disgust')}>
+                      <button className='md:w-[150px] font-medium text-white cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('disgust')}>
                         Disgusted
                       </button>
 
-                      <button className='md:w-[150px] font-medium text-white hover:text-custom cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('fear')}>
+                      <button className='md:w-[150px] font-medium text-white cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('fear')}>
                         Anxious
                       </button>
 
-                      <button className='md:w-[150px] font-medium text-white hover:text-custom cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('happy')}>
+                      <button className='md:w-[150px] font-medium text-white cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('happy')}>
                         Happy
                       </button>
 
-                      <button className='md:w-[150px] font-medium text-white hover:text-custom cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('neutral')}>
+                      <button className='md:w-[150px] font-medium text-white cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('neutral')}>
                         Neutral
                       </button>
 
-                      <button className='md:w-[150px] font-medium text-white hover:text-custom cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('sad')}>
+                      <button className='md:w-[150px] font-medium text-white cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('sad')}>
                         Sad
                       </button>
 
                       <button className='md:w-[150px] select-none pointer-events-none'>
                       </button>
 
-                      <button className='md:w-[150px] font-medium text-white hover:text-custom cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('surprise')}>
+                      <button className='md:w-[150px] font-medium text-white cursor-pointer text-md uppercase px-3 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center' onClick={() => handleChooseMood('surprise')}>
                         Surprised
                       </button>
 

@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import Link from 'next/link'
 import {AiOutlineMenu} from 'react-icons/ai';
-import {RxCross1} from 'react-icons/rx'
+import {RxCross1} from 'react-icons/rx';
+import {HiOutlineArrowNarrowRight} from 'react-icons/hi';
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -15,6 +16,9 @@ const Navbar = () => {
   const handleShowLogin = () => {
     setShowLogin(!showLogin)
   }
+
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <div className='bg-gradient-to-br from-bg-start to-bg-start md:bg-none font-roboto fixed w-full h-20 z-[100] select-none text-white'>
@@ -46,7 +50,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className='font-roboto py-12 flex flex-col'>
-            <button onClick={()=> setNav(false)} className='uppercase mb-4 p-6 px-10 font-light text-lg text-white rounded-full hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>
+            <button onClick={() => {handleNav(); handleShowLogin();}} className='uppercase mb-4 p-6 px-10 font-light text-2xl text-white hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>
               Login
             </button>
           </div>
@@ -61,20 +65,18 @@ const Navbar = () => {
             </div>
 
             <div className='w-full h-full bg-white/10'>
-
               <div className='p-4 text-center bg-white/10'>
                 <h2 className='font-light uppercase'>
                   Login
                 </h2>
               </div>
-
-              <div className='p-4 text-center'>
-
-                <input className='p-2 mb-4 text-black' type='text' name='username' placeholder='username'></input>
-                <input className='p-2 mb-4 text-black' type='password' name='password' placeholder='password'></input>
-                
+              <div className='p-8 text-center grid grid-cols-1 gap-6'>
+                <input className='p-2 text-black' type='text' name='username' placeholder='username' onChange={e => setUserName(e.target.value)}></input>
+                <input className='p-2 text-black' type='password' name='password' placeholder='password' onChange={e => setPassword(e.target.value)}></input>
+                <button className='flex items-center justify-center font-light text-white cursor-pointer text-md uppercase py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center'>
+                  <HiOutlineArrowNarrowRight />
+                </button>
               </div>
-
             </div>
 
           </div>

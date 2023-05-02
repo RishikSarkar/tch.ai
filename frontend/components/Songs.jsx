@@ -76,7 +76,7 @@ const Songs = ({predictionString, recommendedSongs, setRecommendedSongs}) => {
         <div id='songs' className={(predictionString == null)? 'hidden font-roboto selection:text-black selection:bg-white/50 w-full h-screen text-center' 
                                                             : 'font-roboto selection:text-black selection:bg-white/50 w-full h-screen text-center'}>
             <div className='max-w-[1440px] w-full h-full mx-auto p-12 flex justify-center items-center'>
-                <div className='-mb-20'>
+                <div className='-mb-20 mt-12 md:mt-0'>
                     <div className={(predictionString == 'sad' || predictionString == 'angry' || predictionString == 'surprise')? 'max-w-[400px] md:max-w-none bg-white/5 p-4' : 'max-w-[400px] md:max-w-none bg-black/20 p-4'}>
                         <div className={`border-2 border-custom p-6`} style={{ '--border-color': `var(--bg-end)` }} >
                             <table className='font-light text-white'>
