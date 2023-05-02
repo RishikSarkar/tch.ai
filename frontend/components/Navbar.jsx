@@ -52,18 +52,34 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className={showLogin? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/80' : ''}>
-
-      </div>
+      
       {showLogin && (
-        <div className='w-[500px] h-[500px] bg-gradient-to-br from-bg-start to-bg-start mx-auto p-12 flex justify-center items-center'>
-          <div className='p-4'>
-            <h2 className='font-light uppercase'>
-              Login
-            </h2>
+          <div className={`border-4 border-custom relative z-10 w-[450px] h-[550px] bg-gradient-to-br from-bg-start to-bg-start mx-auto p-12 flex justify-center items-center`} style={{ '--border-color': `var(--bg-end)` }}>
+
+            <div onClick={handleShowLogin} className='absolute top-1 right-1 text-xl text-white hover:bg-white hover:bg-opacity-20 ease-in duration-100 p-3 cursor-pointer'>
+                <RxCross1 />
+            </div>
+
+            <div className='w-full h-full bg-white/10'>
+
+              <div className='p-4 text-center bg-white/10'>
+                <h2 className='font-light uppercase'>
+                  Login
+                </h2>
+              </div>
+
+              <div className='p-4 text-center'>
+
+                <input className='p-2 mb-4 text-black' type='text' name='username' placeholder='username'></input>
+                <input className='p-2 mb-4 text-black' type='password' name='password' placeholder='password'></input>
+                
+              </div>
+
+            </div>
+
           </div>
-        </div>
-      )}
+        )}
+      <div className={showLogin? 'z-0 fixed left-0 top-0 w-full h-screen bg-white/20' : ''}> </div>
 
     </div>
   )
