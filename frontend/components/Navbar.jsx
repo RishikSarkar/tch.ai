@@ -17,8 +17,26 @@ const Navbar = () => {
     setShowLogin(!showLogin)
   }
 
-  const [userName, setUserName] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  function handleLogin() {
+    console.log(`username: ${username}, password: ${password}`);
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({username, password})
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Error logging in: ', error);
+    });
+  }
 
   return (
     <div className='bg-gradient-to-br from-bg-start to-bg-start md:bg-none font-roboto fixed w-full h-20 z-[100] select-none text-white'>
@@ -71,9 +89,10 @@ const Navbar = () => {
                 </h2>
               </div>
               <div className='p-8 text-center grid grid-cols-1 gap-6'>
-                <input className='p-2 text-black' type='text' name='username' placeholder='username' onChange={e => setUserName(e.target.value)}></input>
+                <input className='p-2 text-black' type='text' name='username' placeholder='username' onChange={e => setUsername(e.target.value)}></input>
                 <input className='p-2 text-black' type='password' name='password' placeholder='password' onChange={e => setPassword(e.target.value)}></input>
-                <button className='flex items-center justify-center font-light text-white cursor-pointer text-md uppercase py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center'>
+                <button className='flex items-center justify-center font-light text-white cursor-pointer text-md uppercase py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center'
+                        onClick={handleLogin}>
                   <HiOutlineArrowNarrowRight />
                 </button>
               </div>
