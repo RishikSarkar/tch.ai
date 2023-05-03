@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlinePlus, AiOutlineCheck } from 'react-icons/ai';
 import { FiPlay, FiRefreshCcw } from 'react-icons/fi';
 import SpotifyWebApi from "spotify-web-api-js";
 import axios from 'axios';
@@ -72,6 +72,43 @@ const Songs = ({ predictionString, recommendedSongs, setRecommendedSongs }) => {
         }
     };
 
+    const [trackname, setTrackName] = useState('');
+    const [trackartists, setTrackArtists] = useState('');
+    const [addSuccess, setAddSuccess] = useState(false);
+
+    const handleSetTempSong = async (trackName, trackArtists) => {
+        setAddSuccess(false);
+        setTrackName(trackName);
+        setTrackArtists(trackArtists);
+
+        handleAddSong();
+    }
+
+    const handleAddSong = async () => {
+        console.log(JSON.stringify({ user, trackname, trackartists }));
+        try {
+          const response = await fetch('/api/addsongs', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user, trackname, trackartists })
+          });
+    
+          const data = await response.json();
+    
+          if (response.ok) {
+            console.log(data.message);
+            setAddSuccess(true);
+          } else {
+            alert(data.error);
+          }
+        } catch (error) {
+          console.error(error);
+          alert('An error occurred');
+        }
+      };
+
     return (
         <div id='songs' className={(predictionString == null) ? 'hidden font-roboto selection:text-black selection:bg-white/50 w-full h-screen text-center'
             : 'font-roboto selection:text-black selection:bg-white/50 w-full h-screen text-center'}>
@@ -99,10 +136,12 @@ const Songs = ({ predictionString, recommendedSongs, setRecommendedSongs }) => {
                                                     {song.artists.replace(/;/g, ', ')}
                                                 </div>
                                             </td>
-                                            <td className='px-4 py-2'>
+                                            <td className={(addSuccess && trackname == song.track_name && trackartists == song.artists.replace(/;/g, ', '))? 'px-4 py-2 pointer-events-none' : 'px-4 py-2'}>
                                                 <button className={(predictionString == 'sad' || predictionString == 'angry' || predictionString == 'surprise') ? 'p-4 hover:bg-white/20 ease-in duration-100 rounded-full hover:text-white/80'
-                                                    : `p-4 hover:bg-white/20 ease-in duration-100 rounded-full hover:text-custom`} style={{ '--border-color': `var(--bg-end)` }}>
-                                                    <AiOutlinePlus size={20} />
+                                                    : `p-4 hover:bg-white/20 ease-in duration-100 rounded-full hover:text-custom`} style={{ '--border-color': `var(--bg-end)` }}
+                                                    onClick={() => handleSetTempSong(song.track_name, song.artists.replace(/;/g, ', '))}>
+                                                    {!(addSuccess && trackname == song.track_name && trackartists == song.artists.replace(/;/g, ', ')) && <AiOutlinePlus size={20} />}
+                                                    {(addSuccess && trackname == song.track_name && trackartists == song.artists.replace(/;/g, ', ')) && <AiOutlineCheck size={20} />}
                                                 </button>
                                             </td>
                                         </tr>
