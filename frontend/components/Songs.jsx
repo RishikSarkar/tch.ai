@@ -72,19 +72,11 @@ const Songs = ({ predictionString, recommendedSongs, setRecommendedSongs }) => {
         }
     };
 
-    const [trackname, setTrackName] = useState('');
-    const [trackartists, setTrackArtists] = useState('');
+    const [nameList, setNameList] = useState([]);
+    const [artistList, setArtistList] = useState([]);
     const [addSuccess, setAddSuccess] = useState(false);
 
-    const handleSetTempSong = async (trackName, trackArtists) => {
-        setAddSuccess(false);
-        setTrackName(trackName);
-        setTrackArtists(trackArtists);
-
-        handleAddSong();
-    }
-
-    const handleAddSong = async () => {
+    const handleAddSong = async (trackname, trackartists) => {
         console.log(JSON.stringify({ user, trackname, trackartists }));
         try {
           const response = await fetch('/api/addsongs', {
@@ -100,6 +92,8 @@ const Songs = ({ predictionString, recommendedSongs, setRecommendedSongs }) => {
           if (response.ok) {
             console.log(data.message);
             setAddSuccess(true);
+            setNameList([...nameList, trackname]);
+            setArtistList([...artistList, trackartists]);
           } else {
             alert(data.error);
           }
@@ -136,12 +130,12 @@ const Songs = ({ predictionString, recommendedSongs, setRecommendedSongs }) => {
                                                     {song.artists.replace(/;/g, ', ')}
                                                 </div>
                                             </td>
-                                            <td className={(addSuccess && trackname == song.track_name && trackartists == song.artists.replace(/;/g, ', '))? 'px-4 py-2 pointer-events-none' : 'px-4 py-2'}>
+                                            <td className={(addSuccess && nameList.includes(song.track_name) && artistList.includes(song.artists.replace(/;/g, ', ')))? 'px-4 py-2 pointer-events-none' : 'px-4 py-2'}>
                                                 <button className={(predictionString == 'sad' || predictionString == 'angry' || predictionString == 'surprise') ? 'p-4 hover:bg-white/20 ease-in duration-100 rounded-full hover:text-white/80'
                                                     : `p-4 hover:bg-white/20 ease-in duration-100 rounded-full hover:text-custom`} style={{ '--border-color': `var(--bg-end)` }}
-                                                    onClick={() => handleSetTempSong(song.track_name, song.artists.replace(/;/g, ', '))}>
-                                                    {!(addSuccess && trackname == song.track_name && trackartists == song.artists.replace(/;/g, ', ')) && <AiOutlinePlus size={20} />}
-                                                    {(addSuccess && trackname == song.track_name && trackartists == song.artists.replace(/;/g, ', ')) && <AiOutlineCheck size={20} />}
+                                                    onClick={async () => await handleAddSong(song.track_name, song.artists.replace(/;/g, ', '))}>
+                                                    {!(addSuccess && nameList.includes(song.track_name) && artistList.includes(song.artists.replace(/;/g, ', '))) && <AiOutlinePlus size={20} />}
+                                                    {(addSuccess && nameList.includes(song.track_name) && artistList.includes(song.artists.replace(/;/g, ', '))) && <AiOutlineCheck size={20} />}
                                                 </button>
                                             </td>
                                         </tr>
