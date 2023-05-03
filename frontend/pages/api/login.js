@@ -25,7 +25,7 @@ export default async function handler(req, res) {
             if (data[0].password === body.password) {
                 res.status(200).json({ message: 'Successfully logged in!' });
             } else {
-                res.status(401).json({ error: 'Invalid Password!'});
+                res.status(401).json({ error: 'Invalid Password!' });
             }
         } else {
             const insertQuery = "INSERT INTO account (username, password) VALUES (?, ?)";
