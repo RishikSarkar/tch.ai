@@ -17,6 +17,12 @@ export default async function handler(req, res) {
     });
 
     try {
+        if (body.username == '' || body.username == null)
+        {
+            res.status(401).json({ error: 'Please Enter a Valid Username!' });
+            return;
+        }
+
         const query = "SELECT * FROM account WHERE username = ?";
         const values = [body.username];
         const [data] = await dbconnection.execute(query, values);

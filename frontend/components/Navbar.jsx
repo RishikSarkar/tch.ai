@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { RxCross1 } from 'react-icons/rx';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
@@ -16,7 +17,7 @@ const Navbar = () => {
 
   const handleShowLogin = () => {
     setShowLogin(!showLogin)
-  }
+  };
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -55,21 +56,39 @@ const Navbar = () => {
     }
   };
 
+  function handleKeyDown(e) {
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
+  const handleShowUserMenu = () => {
+    setShowUserMenu(!showUserMenu);
+  };
+
   return (
     <div className='bg-gradient-to-br from-bg-start to-bg-start md:bg-none font-roboto fixed w-full h-20 z-[100] select-none text-white'>
       <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
         <div className='ml-8 md:ml-0 flex items-center'>
-          <h2 className='font-light text-white'>tch.ai</h2>
+          <Link href="/">
+            <h2 className='font-light text-white'>tch.ai</h2>
+          </Link>
         </div>
         <div>
           <div className='font-light hidden md:flex text-white'>
 
-            <button onClick={handleShowLogin} className={loginSuccess ? 'pointer-events-none uppercase select-none cursor-pointer font-light text-md px-6 py-2 bg-white bg-opacity-10' : 'font-light text-lg uppercase px-6 py-2 hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'}>
-              {!loginSuccess && 'Login'}
-              {loginSuccess && `${username}`}
+            <button onClick={handleShowLogin} className={loginSuccess ? 'hidden' : 'font-light text-lg uppercase px-6 py-2 hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'}>
+              Login
+            </button>
+
+            <button onClick={handleShowUserMenu} className={loginSuccess ? `uppercase select-none font-light text-md px-6 py-2 bg-white ${showUserMenu? 'bg-opacity-20' : 'bg-opacity-10 hover:bg-opacity-20'} ease-in duration-100` : 'hidden'}>
+              {username}
             </button>
 
           </div>
+
           <div onClick={handleNav} className='md:hidden cursor-pointer'>
             <AiOutlineMenu className='mr-8 text-white' size={25} />
           </div>
@@ -94,6 +113,16 @@ const Navbar = () => {
         </div>
       </div>
 
+      {showUserMenu && (
+        <div className='absolute grid grid-cols-1 top-16 right-16 z-10 bg-white/10 mx-auto p-2 flex justify-center items-center'>
+          <Link href='/Dashboard'>
+            <button className='font-light text-sm uppercase px-4 py-2 hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>
+              Saved Songs
+            </button>
+          </Link>
+        </div>
+      )}
+
       {showLogin && (
         <div className={`border-4 border-custom relative z-10 w-[350px] h-[550px] md:w-[450px] md:h-[550px] bg-gradient-to-br from-bg-start to-bg-start mx-auto p-12 flex justify-center items-center`} style={{ '--border-color': `var(--bg-end)` }}>
 
@@ -109,7 +138,7 @@ const Navbar = () => {
             </div>
             <div className='p-8 text-center grid grid-cols-1 gap-6'>
               <input className='p-3 text-black' type='text' name='username' placeholder='username' onChange={e => setUsername(e.target.value)}></input>
-              <input className='p-3 text-black' type='password' name='password' placeholder='password' onChange={e => setPassword(e.target.value)}></input>
+              <input className='p-3 text-black' type='password' name='password' placeholder='password' onChange={e => setPassword(e.target.value)} onKeyDown={handleKeyDown}></input>
               <button className={loginSuccess ? 'font-light text-white cursor-pointer text-md py-3 bg-white bg-opacity-10 select-none text-center'
                 : 'flex items-center justify-center font-light text-white cursor-pointer text-md uppercase py-4 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 select-none text-center'}
                 onClick={handleLogin}>
