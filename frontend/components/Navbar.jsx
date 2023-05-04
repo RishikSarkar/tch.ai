@@ -28,31 +28,36 @@ const Navbar = () => {
   user = username;
 
   const handleLogin = async () => {
-    try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-      });
+    if (botStatus) {
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (response.ok) {
-        console.log(data.message);
-        setMessage(data.message);
-        setLoginSuccess(true);
+        if (response.ok) {
+          console.log(data.message);
+          setMessage(data.message);
+          setLoginSuccess(true);
 
-        setTimeout(() => {
-          handleShowLogin();
-        }, 1500);
-      } else {
-        alert(data.error);
+          setTimeout(() => {
+            handleShowLogin();
+          }, 1500);
+        } else {
+          alert(data.error);
+        }
+      } catch (error) {
+        console.error(error);
+        alert('An error occurred');
       }
-    } catch (error) {
-      console.error(error);
-      alert('An error occurred');
+    }
+    else {
+      alert('Are you human?');
     }
   };
 
@@ -68,6 +73,13 @@ const Navbar = () => {
     setShowUserMenu(!showUserMenu);
   };
 
+  const [botStatus, setBotStatus] = useState(false);
+
+  const humanVerification = (event) => {
+    setBotStatus(event.target.checked);
+    console.log(botStatus);
+  };
+
   return (
     <div className='bg-gradient-to-br from-bg-start to-bg-start md:bg-none font-roboto fixed w-full h-20 z-[100] select-none text-white'>
       <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
@@ -79,11 +91,13 @@ const Navbar = () => {
         <div>
           <div className='font-light hidden md:flex text-white'>
 
-            <button onClick={handleShowLogin} className={loginSuccess ? 'hidden' : 'font-light text-lg uppercase px-6 py-2 hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'}>
-              Login
-            </button>
+            <div className={loginSuccess ? 'hidden' : 'relative'}>
+              <button onClick={handleShowLogin} className={showLogin ? 'font-light text-lg bg-white bg-opacity-30 px-6 py-2 uppercase' : 'font-light text-lg bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 px-6 py-2 uppercase'}>
+                Login
+              </button>
+            </div>
 
-            <button onClick={handleShowUserMenu} className={loginSuccess ? `uppercase select-none font-light text-md px-6 py-2 bg-white ${showUserMenu? 'bg-opacity-20' : 'bg-opacity-10 hover:bg-opacity-20'} ease-in duration-100` : 'hidden'}>
+            <button onClick={handleShowUserMenu} className={loginSuccess ? `uppercase select-none font-light text-md px-6 py-2 bg-white ${showUserMenu ? 'bg-opacity-20' : 'bg-opacity-10 hover:bg-opacity-20'} ease-in duration-100` : 'hidden'}>
               {username}
             </button>
 
@@ -124,6 +138,35 @@ const Navbar = () => {
       )}
 
       {showLogin && (
+        <div className={`absolute border-4 border-custom top-16 right-16 z-10 w-[300px] h-[400px] md:w-[300px] md:h-[400px] bg-black/20 mx-auto p-8 flex justify-center items-center`} style={{ '--border-color': `var(--bg-end)` }}>
+
+          <div className='w-full h-full bg-white/10'>
+            <div className='p-2 text-center bg-white/10'>
+              <h2 className='font-light uppercase text-2xl'>
+                Login
+              </h2>
+            </div>
+            <div className='p-6 text-center grid grid-cols-1 gap-4'>
+              <input className='p-2 text-sm font-light text-black' type='text' name='username' placeholder='username' onChange={e => setUsername(e.target.value)}></input>
+              <input className='p-2 text-sm font-light text-black' type='password' name='password' placeholder='password' onChange={e => setPassword(e.target.value)} onKeyDown={handleKeyDown}></input>
+              <button className={loginSuccess ? 'font-light text-white cursor-pointer text-md py-2 bg-white bg-opacity-20 select-none text-center truncate px-4'
+                : 'flex items-center justify-center font-light text-white cursor-pointer text-md uppercase py-3 bg-white bg-opacity-20 hover:bg-opacity-30 ease-in duration-100 select-none text-center'}
+                onClick={handleLogin}>
+                {!loginSuccess && <HiOutlineArrowNarrowRight />}
+                {loginSuccess && message == 'Successfully logged in!' && `Welcome back ${username}!`}
+                {loginSuccess && message == 'Successfully registered!' && `Registered as ${username}!`}
+              </button>
+              <label className='flex items-center justify-center'>
+                <input className='mr-2 w-4 h-4 cursor-pointer' id='verification' type='checkbox' onChange={humanVerification} />
+                <span className='uppercase text-sm font-light animate-pulse-slow'>Not a Bot</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      )}
+
+      {/* {showLogin && (
         <div className={`border-4 border-custom relative z-10 w-[350px] h-[550px] md:w-[450px] md:h-[550px] bg-gradient-to-br from-bg-start to-bg-start mx-auto p-12 flex justify-center items-center`} style={{ '--border-color': `var(--bg-end)` }}>
 
           <div onClick={handleShowLogin} className='absolute top-1 right-1 text-xl text-white hover:bg-white hover:bg-opacity-20 ease-in duration-100 p-3 cursor-pointer'>
@@ -150,8 +193,8 @@ const Navbar = () => {
           </div>
 
         </div>
-      )}
-      <div className={showLogin ? 'z-0 fixed left-0 top-0 w-full h-screen bg-white/20' : ''}> </div>
+      )} 
+      <div className={showLogin ? 'z-0 fixed left-0 top-0 w-full h-screen bg-white/20' : ''}> </div> */}
 
     </div>
   )
