@@ -25,7 +25,6 @@ const Navbar = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
 
   const [message, setMessage] = useState(null);
-  user = username;
 
   const handleLogin = async () => {
     if (botStatus) {
@@ -44,6 +43,7 @@ const Navbar = () => {
           console.log(data.message);
           setMessage(data.message);
           setLoginSuccess(true);
+          user = username;
 
           setTimeout(() => {
             handleShowLogin();
@@ -60,6 +60,13 @@ const Navbar = () => {
       alert('Are you human?');
     }
   };
+
+  const handleLogout = () => {
+    setUsername('');
+    setPassword('');
+    user = null;
+    setLoginSuccess(false);
+  }
 
   function handleKeyDown(e) {
     if (e.key === 'Enter') {
@@ -79,6 +86,8 @@ const Navbar = () => {
     setBotStatus(event.target.checked);
     console.log(botStatus);
   };
+
+  const [currPage, setCurrPage] = useState('main');
 
   return (
     <div className='bg-gradient-to-br from-bg-start to-bg-start md:bg-none font-roboto fixed w-full h-20 z-[100] select-none text-white'>
@@ -130,15 +139,23 @@ const Navbar = () => {
       {showUserMenu && (
         <div className='absolute grid grid-cols-1 top-16 right-16 z-10 bg-white/10 mx-auto p-2 flex justify-center items-center'>
           <Link href='/Dashboard'>
-            <button className='font-light text-sm uppercase px-4 py-2 hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>
+            <button className={(currPage == 'main')? 'border-2 border-white/20 font-light text-sm uppercase px-4 py-2 mb-2 hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100' : 'hidden'} onClick={() => {handleShowUserMenu(); setCurrPage('dashboard')}}>
               Saved Songs
             </button>
           </Link>
+          <Link href='/'>
+            <button className={(currPage == 'dashboard')? 'border-2 border-white/20 font-light text-sm uppercase px-4 py-2 hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100' : 'hidden'} onClick={() => {handleShowUserMenu(); setCurrPage('main')}}>
+              Home Page
+            </button>
+          </Link>
+          <button className={(currPage == 'main')? 'border-2 border-white/20 font-light text-sm uppercase px-4 py-2 hover:bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100' : 'hidden'} onClick={() => {handleLogout(); handleShowUserMenu();}}>
+            Logout
+          </button>
         </div>
       )}
 
       {showLogin && (
-        <div className={`absolute border-4 border-custom top-16 right-16 z-10 w-[300px] h-[400px] md:w-[300px] md:h-[400px] bg-black/20 mx-auto p-8 flex justify-center items-center`} style={{ '--border-color': `var(--bg-end)` }}>
+        <div className={`absolute border-4 border-custom top-16 right-16 z-10 w-[300px] h-[300px] md:w-[300px] md:h-[340px] bg-black/20 mx-auto p-8 flex justify-center items-center`} style={{ '--border-color': `var(--bg-end)` }}>
 
           <div className='w-full h-full bg-white/10'>
             <div className='p-2 text-center bg-white/10'>

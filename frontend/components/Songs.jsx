@@ -72,6 +72,33 @@ const Songs = ({ predictionString, recommendedSongs, setRecommendedSongs }) => {
         }
     };
 
+    const [songList, setSongList] = useState([]);
+
+    const handleGetSong = async () => {
+        console.log(JSON.stringify({ user }));
+        try {
+            const response = await fetch('/api/getsongs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log(data.message);
+                setSongList(data.songs);
+            } else {
+                alert(data.error);
+            }
+        } catch (error) {
+            console.error(error);
+            alert('An Error Occurred!');
+        }
+    };
+
     const [nameList, setNameList] = useState([]);
     const [artistList, setArtistList] = useState([]);
     const [addSuccess, setAddSuccess] = useState(false);
@@ -79,29 +106,29 @@ const Songs = ({ predictionString, recommendedSongs, setRecommendedSongs }) => {
     const handleAddSong = async (trackname, trackartists) => {
         console.log(JSON.stringify({ user, trackname, trackartists }));
         try {
-          const response = await fetch('/api/addsongs', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ user, trackname, trackartists })
-          });
-    
-          const data = await response.json();
-    
-          if (response.ok) {
-            console.log(data.message);
-            setAddSuccess(true);
-            setNameList([...nameList, trackname]);
-            setArtistList([...artistList, trackartists]);
-          } else {
-            alert(data.error);
-          }
+            const response = await fetch('/api/addsongs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user, trackname, trackartists })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log(data.message);
+                setAddSuccess(true);
+                setNameList([...nameList, trackname]);
+                setArtistList([...artistList, trackartists]);
+            } else {
+                alert(data.error);
+            }
         } catch (error) {
-          console.error(error);
-          alert('An error occurred');
+            console.error(error);
+            alert('An error occurred');
         }
-      };
+    };
 
     return (
         <div id='songs' className={(predictionString == null) ? 'hidden font-roboto selection:text-black selection:bg-white/50 w-full h-screen text-center'
@@ -130,7 +157,7 @@ const Songs = ({ predictionString, recommendedSongs, setRecommendedSongs }) => {
                                                     {song.artists.replace(/;/g, ', ')}
                                                 </div>
                                             </td>
-                                            <td className={(addSuccess && nameList.includes(song.track_name) && artistList.includes(song.artists.replace(/;/g, ', ')))? 'px-4 py-2 pointer-events-none' : 'px-4 py-2'}>
+                                            <td className={(addSuccess && nameList.includes(song.track_name) && artistList.includes(song.artists.replace(/;/g, ', '))) ? 'px-4 py-2 pointer-events-none' : 'px-4 py-2'}>
                                                 <button className={(predictionString == 'sad' || predictionString == 'angry' || predictionString == 'surprise') ? 'p-4 hover:bg-white/20 ease-in duration-100 rounded-full hover:text-white/80'
                                                     : `p-4 hover:bg-white/20 ease-in duration-100 rounded-full hover:text-custom`} style={{ '--border-color': `var(--bg-end)` }}
                                                     onClick={async () => await handleAddSong(song.track_name, song.artists.replace(/;/g, ', '))}>

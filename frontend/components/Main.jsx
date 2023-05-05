@@ -328,14 +328,14 @@ const Main = ({ setPredictionString, setRecommendedSongs }) => {
                 {({ getRootProps, getInputProps }) => (
                   <div {...getRootProps()} className='cursor-pointer'>
                     <input {...getInputProps()} />
-                    <div className='font-medium text-white cursor-pointer text-sm uppercase px-6 py-3 rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>
+                    <div className='font-medium text-white cursor-pointer text-md uppercase px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>
                       <h3 className='max-w-[150px] overflow-hidden truncate'>{uploadedFile ? `${uploadedFile.name}` : 'Select Image'}</h3>
                     </div>
                   </div>
                 )}
               </Dropzone>
 
-              <button onClick={handleFileSubmit} className='w-[200px] font-medium text-white cursor-pointer text-sm uppercase px-6 py-3 rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 mt-4 select-none' title='Upload Image'>
+              <button onClick={handleFileSubmit} className='w-[200px] font-medium text-white cursor-pointer text-md uppercase px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 mt-4 select-none' title='Upload Image'>
                 <h3>Upload Image</h3>
               </button>
 
@@ -349,7 +349,7 @@ const Main = ({ setPredictionString, setRecommendedSongs }) => {
               {showMood && (<div className='text-center animate-pulse-slow'>{mood}</div>)}
             </div>
 
-            <div className={(currPrediction == null) ? 'invisible mt-14 md:mt-16 md:-mb-44' : 'visible mt-14 md:mt-16 md:-mb-44'}>
+            <div className={(currPrediction == null) ? 'invisible mt-14 md:mt-18 md:-mb-44' : 'visible mt-14 md:mt-18 md:-mb-44'}>
               <Link href='/#songs'>
                 <button className={`animate-bounce-slow rounded-full text-white border-2 border-white hover:border-custom ease-in duration-100 p-6 cursor-pointer`} style={{ '--border-color': `var(--bg-end)` }} >
                   <FiMusic size={30} />
@@ -370,14 +370,14 @@ const Main = ({ setPredictionString, setRecommendedSongs }) => {
                 {({ getRootProps, getInputProps }) => (
                   <div {...getRootProps()} className='cursor-pointer'>
                     <input {...getInputProps()} />
-                    <div className='font-medium text-white cursor-pointer text-sm uppercase px-6 py-3 rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>
+                    <div className='font-medium text-white cursor-pointer text-md uppercase px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>
                       <h3 className='max-w-[150px] overflow-hidden truncate'>{uploadedFile ? `${uploadedFile.name}` : 'Select Image'}</h3>
                     </div>
                   </div>
                 )}
               </Dropzone>
 
-              <button onClick={handleFileSubmit} className='w-[200px] font-medium text-white cursor-pointer text-sm uppercase px-6 py-3 rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 mt-4 select-none' title='Upload Image'>
+              <button onClick={handleFileSubmit} className='w-[200px] font-medium text-white cursor-pointer text-md uppercase px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 mt-4 select-none' title='Upload Image'>
                 <h3>Upload Image</h3>
               </button>
 
@@ -391,7 +391,7 @@ const Main = ({ setPredictionString, setRecommendedSongs }) => {
               {showMood && (<div className='text-center animate-pulse-slow'>{mood}</div>)}
             </div>
 
-            <div className={(currPrediction == null) ? 'invisible mt-14 md:mt-16 md:-mb-44' : 'visible mt-14 md:mt-16 md:-mb-44'}>
+            <div className={(currPrediction == null) ? 'invisible mt-14 md:mt-18 md:-mb-44' : 'visible mt-14 md:mt-18 md:-mb-44'}>
               <Link href='/#songs'>
                 <button className={`animate-bounce-slow rounded-full text-white border-2 border-white hover:border-custom ease-in duration-100 p-6 cursor-pointer`} style={{ '--border-color': `var(--bg-end)` }} >
                   <FiMusic size={30} />
