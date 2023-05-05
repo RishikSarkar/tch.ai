@@ -19,8 +19,8 @@ const Navbar = () => {
     setShowLogin(!showLogin)
   };
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
 
   const [loginSuccess, setLoginSuccess] = useState(false);
 
@@ -62,8 +62,8 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    setUsername('');
-    setPassword('');
+    setUsername(null);
+    setPassword(null);
     user = null;
     setLoginSuccess(false);
   }
