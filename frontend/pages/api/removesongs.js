@@ -32,7 +32,7 @@ export default async function handler(req, res) {
             const song = [data[0].id, body.trackname, body.trackartists];
             const [songexists] = await dbconnection.execute(containsquery, song);
 
-            if (songexists.length > 0) {
+            if (songexists.length >= 0) {
                 const songquery = "DELETE FROM songlist WHERE uid = ? AND trackname = ? AND trackartists = ?";
                 const song = [data[0].id, body.trackname, body.trackartists];
                 await dbconnection.execute(songquery, song);

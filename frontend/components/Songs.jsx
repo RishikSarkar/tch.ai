@@ -70,7 +70,7 @@ const Songs = ({ predictionString, recommendedSongs, setRecommendedSongs }) => {
             if (user != null) {
                 handleGetSong();
             }
-            
+
             setRecommendedSongs(songs);
         } catch (error) {
             console.error(error);
@@ -96,7 +96,7 @@ const Songs = ({ predictionString, recommendedSongs, setRecommendedSongs }) => {
                 console.log(data.message);
                 setSongList(data.songs);
             } else {
-                alert(data.error);
+                console.error(data.error);
             }
         } catch (error) {
             console.error(error);
@@ -173,8 +173,8 @@ const Songs = ({ predictionString, recommendedSongs, setRecommendedSongs }) => {
                             </table>
                         </div>
                     </div>
-                    <button className={(predictionString == 'sad' || predictionString == 'angry' || predictionString == 'surprise') ? `hover:bg-white/20 rounded-full mt-8 bg-white/5 text-white hover:text-white/80 hover:-rotate-180 ease-in duration-200 p-4 cursor-pointer`
-                        : `hover:bg-black/5 rounded-full mt-8 bg-black/20 text-white hover:text-custom hover:-rotate-180 ease-in duration-200 p-4 cursor-pointer`}
+                    <button className={(predictionString == 'sad' || predictionString == 'angry' || predictionString == 'surprise') ? `hover:bg-white/20 rounded-full mt-8 md:mt-12 bg-white/5 text-white hover:text-white/80 hover:-rotate-180 ease-in duration-200 p-4 cursor-pointer`
+                        : `hover:bg-black/5 rounded-full mt-8 md:mt-12 bg-black/20 text-white hover:text-custom hover:-rotate-180 ease-in duration-200 p-4 cursor-pointer`}
                         style={{ '--border-color': `var(--bg-end)` }}
                         onClick={() => handleSongRecommendations(predictionString)} >
                         <FiRefreshCcw size={20} />

@@ -28,7 +28,7 @@ const Dashboard = () => {
                 console.log(data.message);
                 setSongList(data.songs);
             } else {
-                alert(data.error);
+                console.error(data.error);
             }
         } catch (error) {
             console.error(error);
@@ -51,9 +51,15 @@ const Dashboard = () => {
 
             if (response.ok) {
                 console.log(data.message);
-                handleGetSong();
+
+                if (songList.length > 1){
+                    handleGetSong();
+                }
+                else {
+                    setSongList([]);
+                }
             } else {
-                alert(data.error);
+                console.error(data.error);
             }
         } catch (error) {
             console.error(error);
@@ -99,6 +105,10 @@ const Dashboard = () => {
                                                 </td>
                                             </tr>
                                         ))}
+                                        {(songList.length == 0) && (
+                                        <div className='uppercase animate-pulse-slow'>
+                                            No Songs Added Yet
+                                        </div>)}
                                     </tbody>
                                 </table>
                             </div>
