@@ -164,8 +164,8 @@ const Navbar = () => {
               </h2>
             </div>
             <div className='p-6 text-center grid grid-cols-1 gap-4'>
-              <input className='p-2 text-sm font-light text-black' type='text' name='username' placeholder='username' onChange={e => setUsername(e.target.value)}></input>
-              <input className='p-2 text-sm font-light text-black' type='password' name='password' placeholder='password' onChange={e => setPassword(e.target.value)} onKeyDown={handleKeyDown}></input>
+              <input className='p-2 text-sm font-light text-black focus:outline-none' type='text' name='username' placeholder='username' onChange={e => setUsername(e.target.value)}></input>
+              <input className='p-2 text-sm font-light text-black focus:outline-none' type='password' name='password' placeholder='password' onChange={e => setPassword(e.target.value)} onKeyDown={handleKeyDown}></input>
               <button className={loginSuccess ? 'font-light text-white cursor-pointer text-md py-2 bg-white bg-opacity-20 select-none text-center truncate px-4'
                 : 'flex items-center justify-center font-light text-white cursor-pointer text-md uppercase py-3 bg-white bg-opacity-20 hover:bg-opacity-30 ease-in duration-100 select-none text-center'}
                 onClick={handleLogin}>

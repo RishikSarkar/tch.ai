@@ -37,7 +37,7 @@ model = load_model(model_path)
 song_dataset = pd.read_csv(os.path.join('data', 'dataset.csv'))
 song_dataset = song_dataset[['track_name', 'artists', 'energy', 'loudness', 'mode', 'valence', 'track_genre', 'popularity']]
 
-# Predict Emotion
+# Predict Emotion from Image
 @app.route('/predict-emotion', methods=['POST'])
 def predict_emotion():
     file = request.files['image']
@@ -141,6 +141,56 @@ def find_song_genres(pred):
         return ['acoustic', 'alternative', 'blues', 'goth', 'romance', 'sleep', 'soul', 'classical', 'piano', 'british', 'emo']
     elif (pred == 'surprise'):
         return ['alt-rock', 'anime', 'bluegrass', 'breakbeat', 'detroit-techno', 'disco', 'dubstep', 'edm', 'hip-hop', 'house', 'rock-n-roll']
+
+
+import re
+import string
+import pickle
+from sklearn.preprocessing import LabelEncoder
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+with open('model/tokenizer.pickle', 'rb') as f:
+    tokenizer = pickle.load(f)
+
+with open('model/labelEncoder.pickle', 'rb') as f:
+    le = pickle.load(f)
+
+nlp_model = load_model('model/emotions_nlp.h5')
+
+str_punc = string.punctuation.replace(',', '').replace("'", '')
+
+def clean(text):
+    global str_punc
+    text = re.sub(r'[^a-zA-Z ]', '', text)
+    text = text.lower()
+    return text
+
+def set_mood_nlp(result):
+    if (result == 'sadness'):
+        return 'sad'
+    elif (result == 'joy' or result == 'love'):
+        return 'happy'
+    elif (result == 'fear'):
+        return 'fear'
+    elif (result == 'anger'):
+        return 'angry'
+    elif (result == 'surprise'):
+        return 'surprise'
+    else:
+        return 'neutral'
+
+# Predict Emotion from Text
+@app.route('/predict-emotion-nlp', methods=['POST'])
+def predict_text_emotion():
+    sentence = request.get_data(as_text=True)
+
+    sentence = clean(sentence)
+    sentence = tokenizer.texts_to_sequences([sentence])
+    sentence = pad_sequences(sentence, maxlen=256, truncating='pre')
+    result = le.inverse_transform(np.argmax(nlp_model.predict(sentence), axis=-1))[0]
+    prediction = set_mood_nlp(result)
+
+    return prediction
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

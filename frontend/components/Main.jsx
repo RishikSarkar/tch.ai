@@ -59,14 +59,14 @@ const Main = ({ setPredictionString, setRecommendedSongs }) => {
     if (showMe == true) {
       setShowMe(false);
     }
-    setCurrTitle("How You Doin'");
+    setCurrTitle("Tell Me Something");
     setTellMe(true);
   }
 
   const handleMoodChange = (prediction) => {
     switch (prediction) {
       case 'angry':
-        setMood("You look angry. Ready to unleash your inner metalhead?");
+        setMood("You seem angry. Ready to unleash your inner metalhead?");
 
         setBgStart('#000000');
         setBgEnd('#800000');
@@ -90,7 +90,7 @@ const Main = ({ setPredictionString, setRecommendedSongs }) => {
         setCurrTitle('Anxiety');
         break;
       case 'happy':
-        setMood("You look happy! Happy vibes, coming your way!");
+        setMood("You seem happy! Happy vibes, coming your way!");
 
         setBgStart('#C04000');
         setBgEnd('#FCF55F');
@@ -98,7 +98,7 @@ const Main = ({ setPredictionString, setRecommendedSongs }) => {
         setCurrTitle('Joy');
         break;
       case 'neutral':
-        setMood("You look neutral. Not sure what you're in the mood for?");
+        setMood("You seem neutral. Not sure what you're in the mood for?");
 
         setBgStart('#630330');
         setBgEnd('#CCCCFF');
@@ -114,7 +114,7 @@ const Main = ({ setPredictionString, setRecommendedSongs }) => {
         setCurrTitle('Sadness')
         break;
       case 'surprise':
-        setMood("You look surprised! Get ready to feel the energy!");
+        setMood("You seem surprised! Get ready to feel the energy!");
 
         setBgStart('#26142A');
         setBgEnd('#DE3163');
@@ -197,6 +197,45 @@ const Main = ({ setPredictionString, setRecommendedSongs }) => {
       console.error(error);
     }
   };
+
+  const [moodText, setMoodText] = useState('');
+
+  const handleTextSubmit = async () => {   
+    try {
+      const pred = await fetch('http://localhost:5000/predict-emotion-nlp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+        body: moodText,
+      });
+
+      if (!pred.ok) {
+        throw new Error('Failed to upload the sentence!');
+      }
+
+      const prediction = await pred.text();
+      console.log(prediction);
+
+      setPredictionString(prediction);
+      handleSongRecommendations(prediction);
+      setCurrPrediction(prediction);
+
+      handleMoodChange(prediction);
+      handleChosenMoodChange(prediction);
+      setShowMood(false);
+      setShowMood(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  function handleEnterText(event) {
+    if (event.key === 'Enter')
+    {
+      handleTextSubmit();
+    }
+  }
 
   const handleChooseMood = (prediction) => {
     setPredictionString(prediction);
@@ -365,26 +404,12 @@ const Main = ({ setPredictionString, setRecommendedSongs }) => {
               {currTitle}
             </h1>
 
-            <div className='max-w-[200px] m-auto py-4 select-none' title='Select Image'>
-              <Dropzone onDrop={handleFileUpload}>
-                {({ getRootProps, getInputProps }) => (
-                  <div {...getRootProps()} className='cursor-pointer'>
-                    <input {...getInputProps()} />
-                    <div className='font-medium text-white cursor-pointer text-md uppercase px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100'>
-                      <h3 className='max-w-[150px] overflow-hidden truncate'>{uploadedFile ? `${uploadedFile.name}` : 'Select Image'}</h3>
-                    </div>
-                  </div>
-                )}
-              </Dropzone>
+            <div className='max-w-[350px] m-auto py-4' title='Write Text'>
+              <input className='w-[350px] px-4 py-3 text-md font-light text-black select-text focus:outline-none selection:bg-black/20' type='text' name='mood text' placeholder="I'm in the mood for..." onChange={e => setMoodText(e.target.value)} onKeyPress={handleEnterText}></input>
 
-              <button onClick={handleFileSubmit} className='w-[200px] font-medium text-white cursor-pointer text-md uppercase px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 mt-4 select-none' title='Upload Image'>
-                <h3>Upload Image</h3>
+              <button onClick={handleTextSubmit} className='w-[350px] font-medium text-white cursor-pointer text-md uppercase px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 mt-4 select-none' title='Upload Image'>
+                <h3>Send</h3>
               </button>
-
-              {/*<Webcam audio={false} ref={webcamRef} screenshotFormat='image/jpeg' style={{display:'none'}} />
-                        <button onClick={capture} className='w-[200px] font-medium text-white cursor-pointer text-sm uppercase px-6 p-3 rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 ease-in duration-100 mt-4'>
-                            <h3>Take Picture!</h3>
-                          </button>*/}
             </div>
 
             <div className='py-4 font-light text-lg text-white'>
